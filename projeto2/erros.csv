@@ -1,0 +1,11 @@
+Linha 1: Campo 'CODIGO CLIENTE' deve ser um número de até 9 dígitos., Campo 'CONTRIBUI ICMS' deve ser 'S' ou 'N'., Campo 'CONTA CLIENTE' deve ser um número de até 7 dígitos., Campo 'CONTA ADTO. CLIENTE' deve ser um número de até 7 dígitos.
+Linha 101: Campo 'CODIGO CLIENTE' não pode ser repetido.
+Linha 201: Campo 'RAZAO SOCIAL' não pode ser vazio., Campo 'CODIGO CLIENTE' não pode ser repetido.
+Linha 301: Campo 'CONTRIBUI ICMS' deve ser 'S' ou 'N'., Campo 'CODIGO CLIENTE' não pode ser repetido.
+Linha 401: Campo 'RAZAO SOCIAL' não pode ser vazio., Campo 'CODIGO CLIENTE' não pode ser repetido.
+Linha 501: Campo 'CODIGO CLIENTE' não pode ser repetido.
+Linha 601: Campo 'RAZAO SOCIAL' não pode ser vazio., Campo 'CONTRIBUI ICMS' deve ser 'S' ou 'N'., Campo 'CODIGO CLIENTE' não pode ser repetido.
+Linha 701: Campo 'CODIGO CLIENTE' não pode ser repetido.
+Linha 801: Campo 'RAZAO SOCIAL' não pode ser vazio., Campo 'CODIGO CLIENTE' não pode ser repetido.
+Linha 901: Campo 'CONTRIBUI ICMS' deve ser 'S' ou 'N'., Campo 'CODIGO CLIENTE' não pode ser repetido.
+Linha 1001: Campo 'RAZAO SOCIAL' não pode ser vazio., Campo 'CODIGO CLIENTE' não pode ser repetido.

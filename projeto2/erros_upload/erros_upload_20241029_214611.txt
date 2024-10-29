@@ -1,0 +1,4 @@
+Erros na linha 1: Campo 'CALCULO DESONERACAO ICMS' não pode ser vazio., Campo 'INDUSTRIA' não pode ser vazio., Campo 'GRUPO CONTAS A PAGAR' não pode ser vazio.
+Erros na linha 2: Campo 'CALCULO DESONERACAO ICMS' não pode ser vazio., Campo 'INDUSTRIA' não pode ser vazio., Campo 'GRUPO CONTAS A PAGAR' não pode ser vazio., Campo 'CODIGO CLIENTE' não pode ser repetido.
+Erros na linha 3: Campo 'CALCULO DESONERACAO ICMS' não pode ser vazio., Campo 'INDUSTRIA' não pode ser vazio., Campo 'GRUPO CONTAS A PAGAR' não pode ser vazio., Campo 'CODIGO CLIENTE' não pode ser repetido.
+Erros na linha 4: Campo 'CALCULO DESONERACAO ICMS' não pode ser vazio., Campo 'INDUSTRIA' não pode ser vazio., Campo 'GRUPO CONTAS A PAGAR' não pode ser vazio.
