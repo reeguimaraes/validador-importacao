@@ -3,85 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload de CSV</title>
+    <title>Dashboard do Sistema</title>
+    <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e9ecef;
-            margin: 0;
-            padding: 20px;
-        }
-        .header {
-            background-color: #343a40;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 5px 5px 0 0;
-        }
-        h1 {
-            margin: 0;
-        }
-        .container {
-            max-width: 600px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-            margin-top: 20px;
-        }
-        input[type="file"], select {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        input[type="submit"] {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            width: 100%;
-            border-radius: 5px;
-        }
-        input[type="submit"]:hover {
-            background-color: #218838;
-        }
-    </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>Upload de Arquivo CSV</h1>
-    <p>Escolha o layout do arquivo que você deseja enviar</p>
-</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Sistema de Upload</a>
+    <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a class="nav-link" href="index.php">Dashboard</a></li>
+            <li class="nav-item"><a class="nav-link" href="upload.php">Upload</a></li>
+        </ul>
+    </div>
+</nav>
 
-<div class="container">
-    <form action="upload.php" method="POST" enctype="multipart/form-data" id="uploadForm">
-        <label for="layout">Selecione o Layout:</label>
-        <select name="layout" id="layout" required>
-            <option value="">Selecione um layout</option>
-            <?php
-            include 'includes/conexao.php';
-            $query = "SELECT idMigTabela, nome FROM idMigTabela"; // Ajuste a consulta conforme necessário
-            $result = $conn->query($query);
-            while ($row = $result->fetch_assoc()) {
-                echo "<option value='{$row['idMigTabela']}'>{$row['nome']}</option>";
-            }
-            ?>
-        </select>
-
-        <label for="csv_file">Escolha um arquivo CSV:</label>
-        <input type="file" name="csv_file" id="csv_file" accept=".csv" required>
+<div class="container my-5">
+    <h1 class="text-center mb-4">Dashboard de Status</h1>
+    <div class="row">
+        <!-- Card de Informações de Erros -->
+        <div class="col-md-4">
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-header">Erros Recentes</div>
+                <div class="card-body">
+                    <h5 class="card-title">5 Erros Detectados</h5>
+                    <p class="card-text">Veja os detalhes no relatório de erros para corrigir problemas nos uploads recentes.</p>
+                    <a href="erros_upload/ultimo_relatorio.txt" class="btn btn-light">Baixar Relatório</a>
+                </div>
+            </div>
+        </div>
         
-        <input type="submit" value="Enviar">
-    </form>
+        <div class="col-md-4">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-header">Ações Rápidas</div>
+                <div class="card-body">
+                    <h5 class="card-title">Iniciar Novo Upload</h5>
+                    <a href="upload.php" class="btn btn-light">Fazer Upload</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card de Informações Gerais -->
+        <div class="col-md-4">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-header">Status Geral</div>
+                <div class="card-body">
+                    <h5 class="card-title">Uploads Hoje</h5>
+                    <p class="card-text">10 uploads processados hoje com sucesso.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card de Links Úteis -->
+       
+    </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

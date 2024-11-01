@@ -21,6 +21,7 @@ function getValidationRules($idMigTabela, $conn) {
 
     return $rules; // Retorna array associativo com as regras
 }
+
 function processCsvFile($file, $idMigTabela, $conn, $errorDir) {
     $messages = [];
     $lines = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -31,53 +32,45 @@ function processCsvFile($file, $idMigTabela, $conn, $errorDir) {
         $lineErrors = [];
 
         foreach ($validationRules as $campo => $rule) {
-            $fieldIndex = array_search($campo, array_keys($validationRules));
-            if ($fieldIndex === false || !isset($data[$fieldIndex])) {
-                continue;
-            }
-
-            $fieldValue = trim($data[$fieldIndex]);
-
-            // Verifica se o campo permite nulo e está vazio
+            $fieldIndex = array_search($campo, array_keys($validationRules)); // Encontra o índice do campo
+            $fieldValue = $data[$fieldIndex] ?? '';
+        
+            // Verifica se o campo permite nulo
             if ($rule['permiteNull'] == 0 && empty($fieldValue)) {
                 $lineErrors[] = "Campo '$campo' não pode ser vazio.";
-                continue;
+                continue; // Passa para o próximo campo se houver erro de nulidade
             }
-
-            // Validação de tipo e tamanho apenas se o campo tiver um valor
+        
+            // Executa validação de tipo e tamanho apenas se o campo tiver um valor
             if (!empty($fieldValue)) {
-                if ($rule['tipo'] === 'Numero') {
-                    if (!is_numeric($fieldValue)) {
-                        $lineErrors[] = "Campo '$campo' deve ser numérico.";
-                    } elseif (strlen($fieldValue) > $rule['tamanho']) {
-                        $lineErrors[] = "Campo '$campo' deve ter no máximo {$rule['tamanho']} dígitos.";
-                    }
+                // Verifica o tipo e tamanho
+                if ($rule['tipo'] === 'Numero' && (!is_numeric($fieldValue) || strlen($fieldValue) > $rule['tamanho'])) {
+                    $lineErrors[] = "Campo '$campo' deve ser numérico com até {$rule['tamanho']} dígitos.";
                 }
-
                 if ($rule['tipo'] === 'Texto' && strlen($fieldValue) > $rule['tamanho']) {
                     $lineErrors[] = "Campo '$campo' excede o limite de {$rule['tamanho']} caracteres.";
                 }
-
+        
+                // Verifica a restrição de não zero
                 if ($rule['naoZero'] && $fieldValue == '0') {
                     $lineErrors[] = "Campo '$campo' não pode ser zero.";
                 }
             }
         }
 
+        // Armazena erros por linha
         if (!empty($lineErrors)) {
             $messages[] = "Linha " . ($lineNumber + 1) . ": " . implode(", ", $lineErrors);
         }
     }
 
+    // Gera um arquivo de erros, se necessário
     if (!empty($messages)) {
         $errorFileName = "erros_upload_" . date('Ymd_His') . ".txt";
         $errorFilePath = "$errorDir/$errorFileName";
         file_put_contents($errorFilePath, implode(PHP_EOL, $messages));
-        return ['errors' => $messages, 'errorFile' => $errorFilePath];
     }
 
-    return ['success' => true];
+    return !empty($messages); // Retorna verdadeiro se houver erros
 }
-
-
 ?>
